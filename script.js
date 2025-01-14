@@ -14,7 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < 9; i++) {
             const tile = document.createElement('div');
             tile.classList.add('game-tile');
-            tile.addEventListener('click', () => handleTileClick(tile));
+            
+            // Add image element to each tile
+            const image = document.createElement('img');
+            image.src = 'images/smiling.png';
+            tile.appendChild(image);
+
+            tile.addEventListener('click', () => handleTileClick(tile, image));
             gameBoard.appendChild(tile);
         }
     }
@@ -22,7 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Randomly activate a tile
     function activateTile() {
         const tiles = document.querySelectorAll('.game-tile');
-        tiles.forEach(tile => tile.classList.remove('active'));
+        tiles.forEach(tile => {
+            tile.classList.remove('active');
+            tile.querySelector('img').classList.remove('clicked'); // Reset animation state
+        });
         const randomTile = tiles[Math.floor(Math.random() * tiles.length)];
         randomTile.classList.add('active');
 
@@ -33,16 +42,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Handle tile click
-    function handleTileClick(tile) {
+    function handleTileClick(tile, image) {
         if (tile.classList.contains('active')) {
             score++;
             scoreDisplay.textContent = `Score: ${score}`;
+
+            // Add blowing effect
+            image.classList.add('clicked');
+
+            // Deactivate tile
             tile.classList.remove('active');
         }
     }
 
     // Start game
     function startGame() {
+        // Reset state for a fresh game
+        clearInterval(gameInterval);
+        clearInterval(timerInterval);
+
         score = 0;
         timeLeft = 30;
         scoreDisplay.textContent = `Score: ${score}`;
@@ -62,21 +80,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 stopGame();
             }
         }, 1000);
+
+        startButton.textContent = 'Restart Game';
     }
 
     // Stop game
     function stopGame() {
         clearInterval(gameInterval);
         clearInterval(timerInterval);
+
         alert(`Game Over! Final Score: ${score}`);
+
+        // Reset the button to "Start Game" after game ends
         startButton.textContent = 'Start Game';
+        gameInterval = null; // Reset game interval
+        timerInterval = null; // Reset timer interval
     }
 
-    // Start button event listener
+    // Start/Restart button event listener
     startButton.addEventListener('click', () => {
-        if (!gameInterval && !timerInterval) {
-            startGame();
-            startButton.textContent = 'Restart Game';
-        }
+        startGame(); // Always starts a fresh game
     });
 });

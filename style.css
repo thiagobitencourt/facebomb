@@ -33,6 +33,12 @@ h1 {
     color: #4caf50;
 }
 
+#record-container {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #ff7043;
+}
+
 #timer {
     font-size: 1.2rem;
     margin-bottom: 20px;
@@ -86,24 +92,28 @@ h1 {
     transform: scale(1); /* Scale up */
 }
 
-/* Add "blowing" effect on click */
-@keyframes blowEffect {
+/* Add keyframes for the blow effect */
+@keyframes blow {
     0% {
         transform: scale(1);
         opacity: 1;
+        box-shadow: 0 0 10px #ff7043;
     }
     50% {
         transform: scale(1.5);
         opacity: 0.5;
+        box-shadow: 0 0 30px #ff7043;
     }
     100% {
-        transform: scale(2);
+        transform: scale(1);
         opacity: 0;
+        box-shadow: 0 0 0px #ff7043;
     }
 }
 
-.game-tile img.clicked {
-    animation: blowEffect 0.5s ease-out forwards;
+/* Apply the blow effect to images */
+.game-tile img.blow {
+    animation: blow 0.5s ease-out;
 }
 
 #start-btn {

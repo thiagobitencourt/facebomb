@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const startButton = document.getElementById('start-btn');
+    const cameraButton = document.getElementById('camera-btn');
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
     const scoreDisplay = document.getElementById('score');
     const timerDisplay = document.getElementById('timer');
     const gameBoard = document.getElementById('game-board');
@@ -8,16 +11,43 @@ document.addEventListener('DOMContentLoaded', () => {
     let gameInterval;
     let timerInterval;
     let timeLeft = 30;
+    let customImageSrc = 'images/smiling.png'; // Default picture
+
+    // Access the camera and capture an image
+    cameraButton.addEventListener('click', async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            video.style.display = 'block';
+
+            // Take a picture on click
+            video.addEventListener('click', () => {
+                const context = canvas.getContext('2d');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                customImageSrc = canvas.toDataURL('image/png');
+                video.style.display = 'none';
+                canvas.style.display = 'none';
+                stream.getTracks().forEach(track => track.stop()); // Stop the camera
+                alert('Picture taken! It will be used in the game.');
+            });
+
+            canvas.style.display = 'block';
+        } catch (error) {
+            console.error('Camera access denied or not available.', error);
+        }
+    });
 
     // Create tiles dynamically
     function createGameBoard() {
         for (let i = 0; i < 9; i++) {
             const tile = document.createElement('div');
             tile.classList.add('game-tile');
-            
+
             // Add image element to each tile
             const image = document.createElement('img');
-            image.src = 'images/smiling.png';
+            image.src = customImageSrc;
             tile.appendChild(image);
 
             tile.addEventListener('click', () => handleTileClick(tile, image));

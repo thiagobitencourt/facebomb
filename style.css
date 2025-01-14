@@ -33,6 +33,12 @@ h1 {
     color: #4caf50;
 }
 
+#timer {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #f44336;
+}
+
 #game-board {
     display: grid;
     grid-template-columns: repeat(3, 100px);

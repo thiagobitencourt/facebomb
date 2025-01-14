@@ -1,10 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const startButton = document.getElementById('start-btn');
     const scoreDisplay = document.getElementById('score');
+    const timerDisplay = document.getElementById('timer');
     const gameBoard = document.getElementById('game-board');
+    const TILE_ACTIVE_DURATION = 800; // Tile active time in milliseconds
     let score = 0;
     let gameInterval;
-    
+    let timerInterval;
+    let timeLeft = 30;
+
     // Create tiles dynamically
     function createGameBoard() {
         for (let i = 0; i < 9; i++) {
@@ -21,6 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
         tiles.forEach(tile => tile.classList.remove('active'));
         const randomTile = tiles[Math.floor(Math.random() * tiles.length)];
         randomTile.classList.add('active');
+
+        // Deactivate the tile after TILE_ACTIVE_DURATION
+        setTimeout(() => {
+            randomTile.classList.remove('active');
+        }, TILE_ACTIVE_DURATION);
     }
 
     // Handle tile click
@@ -35,26 +44,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start game
     function startGame() {
         score = 0;
+        timeLeft = 30;
         scoreDisplay.textContent = `Score: ${score}`;
+        timerDisplay.textContent = `Time Left: ${timeLeft}s`;
         gameBoard.innerHTML = '';
         createGameBoard();
+
+        // Start the game loop
         gameInterval = setInterval(activateTile, 1000);
+
+        // Start the timer
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+
+            if (timeLeft <= 0) {
+                stopGame();
+            }
+        }, 1000);
     }
 
     // Stop game
     function stopGame() {
         clearInterval(gameInterval);
-        alert('Game Over! Final Score: ' + score);
+        clearInterval(timerInterval);
+        alert(`Game Over! Final Score: ${score}`);
+        startButton.textContent = 'Start Game';
     }
 
-    // Start/Stop button event listener
+    // Start button event listener
     startButton.addEventListener('click', () => {
-        if (gameInterval) {
-            stopGame();
-            startButton.textContent = 'Start Game';
-        } else {
+        if (!gameInterval && !timerInterval) {
             startGame();
-            startButton.textContent = 'Stop Game';
+            startButton.textContent = 'Restart Game';
         }
     });
 });

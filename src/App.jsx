@@ -13,7 +13,7 @@ function App() {
     <div>
       <Header userAvatar={user.avatar} userRank={user.rank} userName={user.name} />
       <main>
-        <GameContainer />
+        <GameContainer picture={user.avatar}/>
       </main>
     </div>
   );

@@ -33,10 +33,10 @@ h1 {
     color: #4caf50;
 }
 
-#record-container {
-    margin-top: 10px;
+#score-record {
     font-size: 0.8rem;
     color: #ff7043;
+    margin-left: 5px;
 }
 
 #timer {

@@ -1,16 +1,21 @@
 import React from 'react';
 import GameTile from './GameTile';
 
-const GameBoard = ({ updateScore, gameActive, picture }) => {
-  const tiles = Array.from({ length: 9 }, (_, i) => i);
+const GameBoard = ({ activeTile, picture, onTileClick }) => {
+    const tiles = Array(9).fill(null); // Example for a 3x3 grid
 
-  return (
-    <div id="game-board">
-      {tiles.map(id => (
-        <GameTile key={id} updateScore={updateScore} gameActive={gameActive} picture={picture} />
-      ))}
-    </div>
-  );
+    return (
+        <div id="game-board">
+        {tiles.map((_, index) => (
+            <GameTile
+                key={index}
+                isActive={index === activeTile}
+                onClick={() => onTileClick(index)}
+                picture={picture}
+            />
+        ))}
+        </div>
+    );
 };
 
 export default GameBoard;

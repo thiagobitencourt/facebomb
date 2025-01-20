@@ -1,31 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Face Bomb Game</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="game-container">
-        <h1>Face Bomb Game</h1>
-        <div id="record-container">
-            <div id="personal-record">Personal Record: 0</div>
-        </div>
-        <div id="score">Score: 0</div>
-        <div id="timer">Time Left: 30s</div>
-        <div id="game-board">
-            <!-- Game tiles will be dynamically created by JavaScript -->
-        </div>
-        <div id="controls-container">
-            <button id="start-btn">Start Game</button>
-            <button id="camera-btn">Take Picture</button>
-        </div>
-        <video id="video" autoplay playsinline></video>
-        <canvas id="canvas"></canvas>
-        
-    </div>
-    <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/smilling.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Bomb - Game</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

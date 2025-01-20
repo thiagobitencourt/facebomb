@@ -1,0 +1,76 @@
+:root {
+    --primary-color: #5c6bc0; /* Title color */
+    --secondary-color: #ff7043; /* Subheader link color */
+    --background-color: #fff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--background-color);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    z-index: 1000;
+    padding: 10px 20px;
+    text-align: center;
+  }
+  
+  .header-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
+  
+  .header-menu {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  
+  .user-info:hover .user-avatar {
+    box-shadow: 0 0 4px 2px var(--primary-color);
+  }
+  
+  .user-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 4px 2px var(--secondary-color);
+  }
+  
+  .user-name {
+    font-size: 1rem;
+  }
+
+  .user-rank {
+    margin-left: 3px;
+    font-size: 0.7rem;
+  }
+  
+  .menu-link {
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--secondary-color);
+    transition: color 0.3s ease;
+  }
+  
+  .menu-link:hover {
+    color: var(--primary-color);
+  }

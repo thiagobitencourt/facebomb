@@ -1,10 +1,8 @@
-### **Face Bomb**  
-_A fun, interactive game where players compete to score by quickly clicking images that pop up on the screen. Built for family fun and friendly competition!_
+# React + Vite
 
-### **Overview** 
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-**Face Bomb** is a digital take on the classic "Whac-a-Mole" game, where players use quick reflexes to hit images as they appear on the screen.  
+Currently, two official plugins are available:
 
-- Developed using **HTML, CSS, and JavaScript** for a seamless, interactive frontend experience.  
-- Firebase is used for real-time score tracking and storing user data.  
-- Deployed to **Netlify** for fast and accessible gameplay.  
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

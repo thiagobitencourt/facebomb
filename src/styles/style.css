@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+#game-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #5c6bc0;
+    font-size: 2rem;
+}
+
+#score {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #4caf50;
+}
+
+#record-container {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #ff7043;
+}
+
+#timer {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #f44336;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Add inner shadow for the "hole" effect */
+.game-tile {
+    width: 100px;
+    height: 100px;
+    background-color: #ffb74d;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* For positioning the image inside */
+    overflow: hidden; /* Ensure image stays within the tile */
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.game-tile.active {
+    background-color: #ff7043;
+    box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.3); /* Inner shadow for "hole" effect */
+}
+
+/* Add the rounded picture with glowing border */
+.game-tile img {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    box-shadow: 0 0 8px 4px #5c6bc0; /* Glow effect with title color */
+    opacity: 0; /* Start invisible */
+    transform: scale(0.8); /* Shrink initially */
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none; /* Prevent image blocking tile click */
+    object-fit: fill;
+}
+
+.game-tile.active img {
+    opacity: 1; /* Fade in */
+    transform: scale(1); /* Scale up */
+}
+
+/* Add keyframes for the blow effect */
+@keyframes blow {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 10px #ff7043;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+        box-shadow: 0 0 30px #ff7043;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+        box-shadow: 0 0 0px #ff7043;
+    }
+}
+
+/* Apply the blow effect to images */
+.game-tile img.blow {
+    animation: blow 0.5s ease-out;
+}
+
+#start-btn {
+    background-color: #81c784;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#start-btn:hover {
+    background-color: #66bb6a;
+}
+
+#controls-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#camera-btn {
+    background-color: #81c784;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#camera-btn:hover {
+    background-color: #66bb6a;
+}
+
+#camera-icon {
+    width: 20px;
+    height: 20px;
+    filter: invert(1); /* Ensures white icon matches button text */
+}
+
+#video {
+    display: none;
+    width: 300px;
+    height: 200px;
+    margin: 10px auto;
+    border: 2px solid #5c6bc0;
+    border-radius: 10px;
+}
+
+#canvas {
+    display: none;
+    width: 300px;
+    height: 200px;
+    margin: 10px auto;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+}
